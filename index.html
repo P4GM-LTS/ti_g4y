@@ -1,0 +1,86 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>RSA-sign</title>
+        <link rel="stylesheet" type="text/css" href="src/css/style.css">
+        <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+        <script src="src/js/keysGenerator.js"></script>
+        <script src="src/js/block2.js"></script>
+        <script src="src/js/block3.js"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <header class="menu">
+            <p onclick="display(1)">1 часть</p>
+            <p onclick="display(2)">2 часть</p>
+            <p onclick="display(3)">3 часть</p>
+        </header>
+
+        <section id="block1">
+            <input name="public-key" placeholder="Открытый ключ..." autocomplete="off" readonly>
+            <input name="secret-key" placeholder="Секретный ключ..." autocomplete="off" readonly>
+            <div class = "button">
+                <p>Сгенерировать ключи</p>
+            </div>
+        </section>
+
+        <section id="block2">
+            <input name="message" placeholder="Введите сообщение..." autocomplete="off" type="number" required>
+            <input name="secret-key" placeholder="Введите секретный ключ..." autocomplete="off" required>
+            <input name="sign" placeholder="Подпись..." readonly>
+            <div class = "button">
+                <p>Сгенерировать подпись</p>
+            </div>
+        </section>
+
+        <section id="block3">
+            <input name="message" placeholder="Введите сообщение..." type="number" autocomplete="off" required>
+            <input name="sign" placeholder="Введите подпись..." autocomplete="off" required>
+            <input name="public-key" placeholder="Введите открытый ключ..." autocomplete="off" required>
+            <div class = "button">
+                <p>Проверить</p>
+            </div>
+            <div id="status"></div>
+        </section>
+    </body>
+    <footer>
+        <script>
+            function display(order) {
+                let arr = document.getElementsByTagName('section');
+                for (let i = 0; i<arr.length; i++) {
+                    arr[i].style.display = 'none';
+                }
+                document.getElementById(`block${order}`).style.display = 'flex';
+            }
+            $('#block1 .button').on('click', ()=>{
+                let keys = generateKeys();
+                $('input[name="public-key"]').val(`${keys[0]}`);
+                $('input[name="secret-key"]').val(`${keys[1]}`);
+            });
+            $('#block2 .button').on('click', ()=>{
+                let promise = new Promise((resolve, reject) => {
+                    let userSign = sign($('#block2 input[name="message"]').val(), $('#block2 input[name="secret-key"]').val().split(','));
+                    resolve(userSign);
+                    reject("Error o_0");
+                });
+                promise.then((result)=>{
+                    $('input[name="sign"]').val(`${result}`);
+                    $('input[name="message"]').val(`${$('#block2 input[name="message"]').val()}`);
+                });
+            });
+            $('#block3 .button').on('click', ()=>{
+                let promise = new Promise((resolve) => {
+                    let state = verify($('#block3 input[name="message"]').val(), $('#block3 input[name="sign"]').val(), $('#block3 input[name="public-key"]').val().split(','));
+                    resolve(state);
+                });
+                promise.then((result)=>{
+                    (result)?$('#status').text('Подпись соответствует сообщению!'):$('#status').text('Подпись не соответствует сообщению!');
+                });
+                setTimeout(()=>{
+                    $('#status').text('');
+                }, 2000);
+            });
+        </script>
+    </footer>
+</html>

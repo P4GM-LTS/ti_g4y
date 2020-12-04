@@ -1,0 +1,79 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    width: 100%;
+    font-family: 'Jost', sans-serif;
+    color: black;
+    margin: 0;
+    padding: 0;
+    background: rgb(192, 192, 192);
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 5px;
+    border-bottom: rgba(0, 0, 0, 0.2) 1px solid;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
+    font-size: 20px;
+}
+
+header p:hover {
+    color: rgb(220, 20, 60);
+    transition: all .2s ease-in-out;
+    cursor: pointer;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 8%;
+}
+
+#block2, #block3 {
+    display: none;
+}
+
+input {
+    width: 250px;
+    height: 30px;
+    font-family: 'Jost', sans-serif;
+    font-size: 18px;
+    outline: none;
+    border: none;
+    margin-bottom: 10px;
+    box-shadow: 5px 5px 10px rgba(0,0,0,0.5);
+    text-indent: 5px;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    width: auto;
+    margin-top: 1%;
+    padding: 0 30px 0 30px;
+    font-size: 18px;
+    color: rgb(192, 192, 192);
+    box-shadow: 5px 5px 10px rgba(0,0,0,0.5);
+    background: rgb(57, 57, 57);
+    cursor: pointer;
+}
+
+.button:hover {
+    background: rgb(220, 20, 60);
+    color: black;
+    transition: all .2s ease-in-out;
+}
+
+#status {
+    margin-top: 10px;
+    font-size: 18px;
+}
