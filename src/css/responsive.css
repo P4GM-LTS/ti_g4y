@@ -1,0 +1,22 @@
+@media screen and (min-width: 1920px) {
+    header {
+        font-size: 24px;
+    }
+    section {
+        margin-top: 13%;
+    }
+    input {
+        width: 350px;
+        height: 40px;
+        font-size: 20px;
+        text-indent: 10px;
+    }
+    .button {
+        height: 60px;
+        font-size: 22px;
+    }
+    #status {
+        margin-top: 15px;
+        font-size: 22px;
+    }
+}
