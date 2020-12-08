@@ -47,6 +47,42 @@
     </body>
     <footer>
         <script>
+            // function display(order) {
+            //     let arr = document.getElementsByTagName('section');
+            //     for (let i = 0; i<arr.length; i++) {
+            //         arr[i].style.display = 'none';
+            //     }
+            //     document.getElementById(`block${order}`).style.display = 'flex';
+            // }
+            // $('#block1 .button').on('click', ()=>{
+            //     let keys = generateKeys();
+            //     $('input[name="public-key"]').val(`${keys[0]}`);
+            //     $('input[name="secret-key"]').val(`${keys[1]}`);
+            // });
+            // $('#block2 .button').on('click', ()=>{
+            //     let promise = new Promise((resolve, reject) => {
+            //         let userSign = sign($('#block2 input[name="message"]').val(), $('#block2 input[name="secret-key"]').val().split(','));
+            //         resolve(userSign);
+            //         reject("Error o_0");
+            //     });
+            //     promise.then((result)=>{
+            //         $('input[name="sign"]').val(`${result}`);
+            //         console.log(result);
+            //         $('input[name="message"]').val(`${$('#block2 input[name="message"]').val()}`);
+            //     });
+            // });
+            // $('#block3 .button').on('click', ()=>{
+            //     let promise = new Promise((resolve) => {
+            //         let state = verify($('#block3 input[name="message"]').val(), $('#block3 input[name="sign"]').val(), $('#block3 input[name="public-key"]').val().split(','));
+            //         resolve(state);
+            //     });
+            //     promise.then((result)=>{
+            //         (result)?$('#status').text('Подпись соответствует сообщению!'):$('#status').text('Подпись не соответствует сообщению!');
+            //     });
+            //     setTimeout(()=>{
+            //         $('#status').text('');
+            //     }, 2000);
+            // });
             function display(order) {
                 let arr = document.getElementsByTagName('section');
                 for (let i = 0; i<arr.length; i++) {
@@ -60,24 +96,15 @@
                 $('input[name="secret-key"]').val(`${keys[1]}`);
             });
             $('#block2 .button').on('click', ()=>{
-                let promise = new Promise((resolve, reject) => {
-                    let userSign = sign($('#block2 input[name="message"]').val(), $('#block2 input[name="secret-key"]').val().split(','));
-                    resolve(userSign);
-                    reject("Error o_0");
-                });
-                promise.then((result)=>{
-                    $('input[name="sign"]').val(`${result}`);
-                    $('input[name="message"]').val(`${$('#block2 input[name="message"]').val()}`);
-                });
+                //console.log($('#block2 input[name="message"]').val());
+                let userSign = sign($('#block2 input[name="message"]').val(), $('#block2 input[name="secret-key"]').val().split(','));
+                $('input[name="sign"]').val(`${userSign}`);
+                $('input[name="message"]').val(`${$('#block2 input[name="message"]').val()}`);
+
             });
             $('#block3 .button').on('click', ()=>{
-                let promise = new Promise((resolve) => {
-                    let state = verify($('#block3 input[name="message"]').val(), $('#block3 input[name="sign"]').val(), $('#block3 input[name="public-key"]').val().split(','));
-                    resolve(state);
-                });
-                promise.then((result)=>{
-                    (result)?$('#status').text('Подпись соответствует сообщению!'):$('#status').text('Подпись не соответствует сообщению!');
-                });
+                let state = verify($('#block3 input[name="message"]').val(), $('#block3 input[name="sign"]').val(), $('#block3 input[name="public-key"]').val().split(','));
+                (state)?$('#status').text('Подпись соответствует сообщению!'):$('#status').text('Подпись не соответствует сообщению!');
                 setTimeout(()=>{
                     $('#status').text('');
                 }, 2000);

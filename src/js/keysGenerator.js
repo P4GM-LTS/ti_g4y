@@ -20,7 +20,7 @@ function getPublicExp(num, arr) {
 f=(a,b,c=!(n=b),d=1)=>a?f(b%a,a,d,c-(b-b%a)/a*d):b<2&&(c+n)%n;
 
 function generateKeys() {
-    let primeNumbers = allPrimeNumbers.filter(el => el > 10);
+    let primeNumbers = allPrimeNumbers.filter(el => el > 45);
     let randomIndexes = [Math.floor(Math.random() * primeNumbers.length), Math.floor(Math.random() * primeNumbers.length)];
     let p = primeNumbers[randomIndexes[0]];
     let q = primeNumbers[randomIndexes[1]];
@@ -33,5 +33,4 @@ function generateKeys() {
     let secretKey = [d, n];
     return [publicKey, secretKey];
 }
-var allPrimeNumbers = getPrimes(100);
-
+var allPrimeNumbers = getPrimes(1000);
